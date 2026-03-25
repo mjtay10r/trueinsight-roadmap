@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueInsight AI Transformation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Playfair+Display:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @media print {
+            @page {
+                size: letter;
+                margin: 0.2in;
+            }
+
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .container {
+                box-shadow: none !important;
+                padding: 15px !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                page-break-inside: avoid;
+                transform: scale(1);
+                transform-origin: top center;
+            }
+
+            /* Force colors to print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            /* Force single page */
+            .journey {
+                page-break-inside: avoid !important;
+            }
+
+            .metrics-section, .cta-section {
+                page-break-inside: avoid !important;
+            }
+
+            /* Hide headers and footers */
+            @page :first {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        body {
+            background: white;
+            font-family: 'Manrope', sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 10px;
+        }
+
+        .container {
+            background: white;
+            padding: 10px;
+            max-width: 8.5in;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            height: 25px;
+            object-fit: contain;
+            margin-bottom: 4px;
+        }
+
+        .logo-tagline {
+            font-size: 7px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .divider-v {
+            width: 1px;
+            height: 30px;
+            background: #de7d5a;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-label {
+            font-size: 8px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .header-value {
+            font-size: 10px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #000;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #666;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        .journey {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .phase-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            position: relative;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            right: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, #de7d5a, #e88968, #f7cf9f, #fdd6a0);
+            z-index: 0;
+        }
+
+        .phase {
+            position: relative;
+            z-index: 1;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .phase-header {
+            padding: 15px 10px;
+            text-align: center;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .phase-number {
+            width: 44px;
+            height: 44px;
+            background: #333;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        .phase.foundation .phase-number {
+            background: #333;
+        }
+
+        .phase.sales .phase-number {
+            background: #333;
+        }
+
+        .phase.marketing .phase-number {
+            background: #333;
+        }
+
+        .phase.scale .phase-number {
+            background: #333;
+        }
+
+        .phase-title {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .phase-timeline {
+            font-size: 10px;
+            color: #de7d5a;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+
+        .phase-investment {
+            font-size: 13px;
+            color: #000;
+            font-weight: 700;
+            padding: 4px 10px;
+            background: #f7cf9f30;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .phase-content {
+            padding: 12px 10px;
+            background: #fafafa;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .phase-main-content {
+            flex: 0;
+        }
+
+        .phase-description {
+            font-size: 9.5px;
+            color: #666;
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .phase-items {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+
+        .phase-items li {
+            padding: 5px 0;
+            font-size: 9.5px;
+            color: #333;
+            display: flex;
+            align-items: flex-start;
+            border-bottom: 1px solid #e8e8e8;
+            line-height: 1.3;
+        }
+
+        .phase-items li:last-child {
+            border-bottom: none;
+        }
+
+        .phase-items li::before {
+            content: "▸";
+            color: #de7d5a;
+            margin-right: 5px;
+            font-weight: bold;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .deliverables {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .phase-spacer {
+            flex: 1;
+        }
+
+        .deliverables-title {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .deliverables-list {
+            font-size: 8.5px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .metrics-section {
+            background: linear-gradient(135deg, #000, #222);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            page-break-inside: avoid;
+        }
+
+        .metrics-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #f7cf9f;
+            text-align: center;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .metric-category {
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(247, 207, 159, 0.2);
+        }
+
+        .metric-category-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: #de7d5a;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-name {
+            font-size: 9px;
+            color: #aaa;
+        }
+
+        .metric-value {
+            font-size: 11px;
+            font-weight: 700;
+            color: #f7cf9f;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #de7d5a, #e88968);
+            border-radius: 12px;
+            color: white;
+            page-break-inside: avoid;
+        }
+
+        .cta-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .cta-subtitle {
+            font-size: 11px;
+            margin-bottom: 12px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #de7d5a;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        /* Print-specific optimizations */
+        @media print {
+            .phase:hover {
+                transform: none !important;
+                box-shadow: none !important;
+                border-color: #ddd !important;
+            }
+
+            .cta-button:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logos">
+                <div class="logo-item">
+                    <img src="nativegtm-logo.png" alt="NativeGTM" class="logo">
+                    <div class="logo-tagline">AI Training & Implementation</div>
+                </div>
+                <div class="divider-v"></div>
+                <div class="logo-item">
+                    <img src="final-trueinsight-logo.png" alt="TrueInsight" class="logo">
+                    <div class="logo-tagline">Siemens & Altair Partner</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-label">Proposal Date</div>
+                <div class="header-value">March 2026</div>
+            </div>
+        </div>
+
+        <div class="title-section">
+            <h1 class="title">Your AI Implementation Roadmap</h1>
+            <p class="subtitle">
+                Transform TrueInsight from traditional sales processes to AI-powered operations
+                through a phased approach that builds capabilities while delivering immediate value
+            </p>
+        </div>
+
+        <div class="journey">
+            <div class="progress-line"></div>
+            <div class="phase-container">
+                <!-- Phase 1: Foundation -->
+                <div class="phase foundation">
+                    <div class="phase-header">
+                        <div class="phase-number">1</div>
+                        <div class="phase-title">AI Workshop</div>
+                        <div class="phase-timeline">Build your foundation</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="phase-main-content">
+                            <p class="phase-description">
+                                Establish the technical and cultural foundation for AI adoption across your 5-person sales team
+                            </p>
+                            <ul class="phase-items">
+                                <li>2-day intensive AI Sales Training Workshop for entire team</li>
+                                <li>Claude setup and environment configuration</li>
+                                <li>AI skills, subagents, and advanced commands</li>
+                                <li>Clear understanding of AI tools, models, and terminology</li>
+                            </ul>
+                            <div class="deliverables">
+                            <div class="deliverables-title">Deliverables</div>
+                            <div class="deliverables-list">
+                                • 20+ pre-built GTM AI skills<br>
+                                • Competitor research & battlecards<br>
+                                • ICP personas and messaging<br>
+                                • Team proficiency in Claude Code<br>
+                                • First AI workflow deployed
+                            </div>
+                        </div>
+                        </div>
+                        <div class="phase-spacer"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Sales Acceleration -->
+                <div class="phase sales">
+                    <div class="phase-header">
+                        <div class="phase-number">2</div>
+                        <div class="phase-title">Sales AI</div>
+                        <div class="phase-timeline">Enable team</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="phase-main-content">
+                            <p class="phase-description">
+                                Address your biggest pain points: lead qualification and outreach conversion
+                            </p>
+                            <ul class="phase-items">
+                                <li>Lead research, qualification, and enrichment</li>
+                                <li>Personalized outreach sequence generator</li>
+                                <li>Call transcript analysis and email follow-up automation</li>
+                                <li>Automated meeting prep with company research</li>
+                            </ul>
+                            <div class="deliverables">
+                            <div class="deliverables-title">Deliverables</div>
+                            <div class="deliverables-list">
+                                • Meeting prep automation (20 min saved/meeting)<br>
+                                • Outreach templates based on won deals<br>
+                                • Lead qualification and routing automation<br>
+                                • Weekly call/meeting coaching report
+                            </div>
+                        </div>
+                        </div>
+                        <div class="phase-spacer"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Marketing Engine -->
+                <div class="phase marketing">
+                    <div class="phase-header">
+                        <div class="phase-number">3</div>
+                        <div class="phase-title">Marketing AI</div>
+                        <div class="phase-timeline">Broaden reach</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="phase-main-content">
+                            <p class="phase-description">
+                                Build sustainable content and messaging engines that attract and convert your ideal customers
+                            </p>
+                            <ul class="phase-items">
+                                <li>SEO/AEO content pipeline for technical buyers</li>
+                                <li>Product messaging framework from CRM data and call transcript analysis</li>
+                                <li>Competitor comparison content automation</li>
+                                <li>Outbound email at scale (new channel test)</li>
+                            </ul>
+                            <div class="deliverables">
+                            <div class="deliverables-title">Deliverables</div>
+                            <div class="deliverables-list">
+                                • Data-driven product and messaging guide<br>
+                                • Paid ad agent<br>
+                                • Outbound email weekly snapshot<br>
+                                • Weekly SEO/AEO content published<br>
+                                • Website AI discoverablility audit
+                            </div>
+                        </div>
+                        </div>
+                        <div class="phase-spacer"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 4: Scale & Optimize -->
+                <div class="phase scale">
+                    <div class="phase-header">
+                        <div class="phase-number">4</div>
+                        <div class="phase-title">Optimize</div>
+                        <div class="phase-timeline">Analyze performance</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="phase-main-content">
+                            <p class="phase-description">
+                                Continuously improve and scale your AI operations with data-driven optimization
+                            </p>
+                            <ul class="phase-items">
+                                <li>Lead to Opportunity visibility and reporting</li>
+                                <li>Activity metrics and performance tracking</li>
+                                <li>Process automation for repetitive rev ops tasks</li>
+                                <li>Monthly AI skill training and updates to stay up-to-date</li>
+                            </ul>
+                            <div class="deliverables">
+                            <div class="deliverables-title">Deliverables</div>
+                            <div class="deliverables-list">
+                                • Executive sales dev dashboard<br>
+                                • Process optimization recommendations<br>
+                                • New AI capabilities deployed<br>
+                                • Team performance reports
+                            </div>
+                        </div>
+                        </div>
+                        <div class="phase-spacer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics-section">
+            <div class="metrics-title">PROJECTED PERFORMANCE METRICS</div>
+            <div class="metrics-grid">
+                <div class="metric-category">
+                    <div class="metric-category-title">GTM Metrics</div>
+                    <div class="metric-row">
+                        <span class="metric-name">Cold Outreach Response Rate</span>
+                        <span class="metric-value">2-3X Increase</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Lead Qualification Time</span>
+                        <span class="metric-value">50% Reduction</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Website Visibility</span>
+                        <span class="metric-value">100%+ Increase</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Close Rate Improvement</span>
+                        <span class="metric-value">+15-20%</span>
+                    </div>
+                </div>
+                <div class="metric-category">
+                    <div class="metric-category-title">Operational Metrics</div>
+                    <div class="metric-row">
+                        <span class="metric-name">Time Saved per Rep</span>
+                        <span class="metric-value">5+ hrs/week</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Content Production</span>
+                        <span class="metric-value">10X Output</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Manual Data Entry</span>
+                        <span class="metric-value">50% Reduced</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Deal Insights</span>
+                        <span class="metric-value">80%+ Coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <div class="cta-title">Ready to Start Your AI Transformation?</div>
+            <div class="cta-subtitle">Begin with Week 1: AI Sales Training Foundation</div>
+            <a href="#" class="cta-button">Schedule Your Workshop</a>
+        </div>
+    </div>
+</body>
+</html>
